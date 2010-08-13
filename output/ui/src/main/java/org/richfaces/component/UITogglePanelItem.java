@@ -22,26 +22,27 @@
 
 package org.richfaces.component;
 
+
+
 /**
  * @author akolonitsky
+ * @since 2010-08-13
  */
 public class UITogglePanelItem extends AbstractTogglePanelItem {
 
-    private enum PropertyKeys {
+    public enum PropertyKeys {
         name,
         switchType
     }
 
-    @Override
     public String getName() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.name));
+        return (String) getStateHelper().eval(PropertyKeys.name);
     }
 
     public void setName(String name) {
         getStateHelper().put(PropertyKeys.name, name);
     }
 
-    @Override
     public SwitchType getSwitchType() {
         return (SwitchType) getStateHelper().eval(PropertyKeys.switchType, getParent().getSwitchType());
     }
@@ -49,4 +50,6 @@ public class UITogglePanelItem extends AbstractTogglePanelItem {
     public void setSwitchType(SwitchType switchType) {
         getStateHelper().put(PropertyKeys.switchType, switchType);
     }
+
+
 }

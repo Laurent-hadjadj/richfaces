@@ -22,28 +22,47 @@
 
 package org.richfaces.component.html;
 
-
 import org.richfaces.component.AbstractDivPanel;
+import javax.faces.component.behavior.ClientBehaviorHolder;
 
-public class HtmlDivPanel extends AbstractDivPanel {
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
+/**
+ * @author akolonitsky
+ * @since 2010-08-13
+ */
+public class HtmlDivPanel extends AbstractDivPanel implements ClientBehaviorHolder {
 
     public static final String COMPONENT_TYPE = "org.richfaces.DivPanel";
 
     public static final String COMPONENT_FAMILY = "org.richfaces.DivPanel";
 
-    private enum PropertyKeys {
+    private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList(
+        "click",
+        "dblclick",
+        "mousedown",
+        "mousemove",
+        "mouseout",
+        "mouseover",
+        "mouseup"
+    ));
+
+
+    public enum PropertyKeys {
         lang,
+        title,
+        style,
+        styleClass,
+        dir,
         onclick,
         ondblclick,
         onmousedown,
         onmousemove,
         onmouseout,
         onmouseover,
-        onmouseup,
-        title,
-        style,
-        styleClass,
-        dir
+        onmouseup
     }
 
     public HtmlDivPanel() {
@@ -56,71 +75,15 @@ public class HtmlDivPanel extends AbstractDivPanel {
     }
 
     public String getLang() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.lang));
+        return (String) getStateHelper().eval(PropertyKeys.lang);
     }
 
     public void setLang(String lang) {
         getStateHelper().put(PropertyKeys.lang, lang);
     }
 
-    public String getOnclick() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.onclick));
-    }
-
-    public void setOnclick(String onclick) {
-        getStateHelper().put(PropertyKeys.onclick, onclick);
-    }
-
-    public String getOndblclick() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.ondblclick));
-    }
-
-    public void setOndblclick(String ondblclick) {
-        getStateHelper().put(PropertyKeys.ondblclick, ondblclick);
-    }
-
-    public String getOnmousedown() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.onmousedown));
-    }
-
-    public void setOnmousedown(String onmousedown) {
-        getStateHelper().put(PropertyKeys.onmousedown, onmousedown);
-    }
-
-    public String getOnmousemove() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.onmousemove));
-    }
-
-    public void setOnmousemove(String onmousemove) {
-        getStateHelper().put(PropertyKeys.onmousemove, onmousemove);
-    }
-
-    public String getOnmouseout() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.onmouseout));
-    }
-
-    public void setOnmouseout(String onmouseout) {
-        getStateHelper().put(PropertyKeys.onmouseout, onmouseout);
-    }
-
-    public String getOnmouseover() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.onmouseover));
-    }
-
-    public void setOnmouseover(String onmouseover) {
-        getStateHelper().put(PropertyKeys.onmouseover, onmouseover);
-    }
-
-    public String getOnmouseup() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.onmouseup));
-    }
-
-    public void setOnmouseup(String onmouseup) {
-        getStateHelper().put(PropertyKeys.onmouseup, onmouseup);
-    }
-
     public String getTitle() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.title));
+        return (String) getStateHelper().eval(PropertyKeys.title);
     }
 
     public void setTitle(String title) {
@@ -128,7 +91,7 @@ public class HtmlDivPanel extends AbstractDivPanel {
     }
 
     public String getStyle() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.style));
+        return (String) getStateHelper().eval(PropertyKeys.style);
     }
 
     public void setStyle(String style) {
@@ -136,7 +99,7 @@ public class HtmlDivPanel extends AbstractDivPanel {
     }
 
     public String getStyleClass() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.styleClass));
+        return (String) getStateHelper().eval(PropertyKeys.styleClass);
     }
 
     public void setStyleClass(String styleClass) {
@@ -144,13 +107,74 @@ public class HtmlDivPanel extends AbstractDivPanel {
     }
 
     public String getDir() {
-        return String.valueOf(getStateHelper().eval(PropertyKeys.dir));
+        return (String) getStateHelper().eval(PropertyKeys.dir);
     }
 
     public void setDir(String dir) {
         getStateHelper().put(PropertyKeys.dir, dir);
     }
 
+    public String getOnclick() {
+        return (String) getStateHelper().eval(PropertyKeys.onclick);
+    }
 
+    public void setOnclick(String onclick) {
+        getStateHelper().put(PropertyKeys.onclick, onclick);
+    }
+
+    public String getOndblclick() {
+        return (String) getStateHelper().eval(PropertyKeys.ondblclick);
+    }
+
+    public void setOndblclick(String ondblclick) {
+        getStateHelper().put(PropertyKeys.ondblclick, ondblclick);
+    }
+
+    public String getOnmousedown() {
+        return (String) getStateHelper().eval(PropertyKeys.onmousedown);
+    }
+
+    public void setOnmousedown(String onmousedown) {
+        getStateHelper().put(PropertyKeys.onmousedown, onmousedown);
+    }
+
+    public String getOnmousemove() {
+        return (String) getStateHelper().eval(PropertyKeys.onmousemove);
+    }
+
+    public void setOnmousemove(String onmousemove) {
+        getStateHelper().put(PropertyKeys.onmousemove, onmousemove);
+    }
+
+    public String getOnmouseout() {
+        return (String) getStateHelper().eval(PropertyKeys.onmouseout);
+    }
+
+    public void setOnmouseout(String onmouseout) {
+        getStateHelper().put(PropertyKeys.onmouseout, onmouseout);
+    }
+
+    public String getOnmouseover() {
+        return (String) getStateHelper().eval(PropertyKeys.onmouseover);
+    }
+
+    public void setOnmouseover(String onmouseover) {
+        getStateHelper().put(PropertyKeys.onmouseover, onmouseover);
+    }
+
+    public String getOnmouseup() {
+        return (String) getStateHelper().eval(PropertyKeys.onmouseup);
+    }
+
+    public void setOnmouseup(String onmouseup) {
+        getStateHelper().put(PropertyKeys.onmouseup, onmouseup);
+    }
+
+
+
+    @Override
+    public Collection<String> getEventNames() {
+        return EVENT_NAMES;
+    }
 }
 
