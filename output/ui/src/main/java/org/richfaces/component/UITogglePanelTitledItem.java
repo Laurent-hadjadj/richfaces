@@ -44,7 +44,7 @@ public class UITogglePanelTitledItem extends AbstractTogglePanelTitledItem {
     }
 
     public String getHeader() {
-        return (String) getStateHelper().eval(PropertyKeys.header);
+        return (String) getStateHelper().eval(PropertyKeys.header, getName());
     }
 
     public void setHeader(String header) {
