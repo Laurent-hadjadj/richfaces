@@ -22,77 +22,18 @@
 
 package org.richfaces.renderkit.html.images;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Map;
-
-import javax.faces.context.FacesContext;
-
-import org.richfaces.resource.DynamicResource;
-import org.richfaces.resource.ImageType;
-import org.richfaces.resource.Java2DUserResource;
-import org.richfaces.resource.StateHolderResource;
-import org.richfaces.skin.Skin;
-import org.richfaces.skin.SkinFactory;
 
 /**
  * @author Konstantin Mishin
  * 
  */
-@DynamicResource
-public abstract class SliderArrowBase implements Java2DUserResource, StateHolderResource {
+public abstract class SliderArrowBase extends ArrowBase {
 
     private Dimension dimension =  new Dimension(7, 7);
-    private int color;
-    private String colorName = Skin.GENERAL_TEXT_COLOR;
 
-    private void initialize() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        Skin skin = SkinFactory.getInstance(context).getSkin(context);
-        this.color = skin.getColorParameter(context, colorName);
-    }
-
-    protected final void setColorName(String colorName) {
-        this.colorName = colorName;
-    }
-
+    @Override
     public Dimension getDimension() {
         return dimension;
     }
-    public void paint(Graphics2D graphics2d, Dimension dimension) {
-        graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics2d.setColor(new Color(color));
-    }
-
-    public void writeState(FacesContext context, DataOutput dataOutput) throws IOException {
-        initialize();
-        dataOutput.writeInt(this.color);
-    }
-
-    public void readState(FacesContext context, DataInput dataInput) throws IOException {
-        this.color = dataInput.readInt();
-    }
-    
-    public Map<String, String> getResponseHeaders() {
-        return null;
-    }
-
-    public Date getLastModified() {
-        return null;
-    }
-
-    public ImageType getImageType() {
-        return ImageType.PNG;
-    }
-
-    public boolean isTransient() {
-        return false;
-    }
-
 }
