@@ -23,7 +23,6 @@
 
 package org.richfaces.renderkit.html;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -36,9 +35,8 @@ import java.io.IOException;
 public class PanelMenuRendererTest extends RendererTestBase {
 
     @Test
-    @Ignore
     public void testDoEncode() throws IOException, SAXException {
-        doTest("panelMenu", "panelMenu");
+        doTest("panelMenu", "f:panelMenu");
     }
 
 }

@@ -34,16 +34,6 @@ import java.util.Arrays;
  * @since Oct 22, 2010
  */
 public class IgnoreScriptsContent implements DifferenceListener {
-    private static final int[] IGNORE = new int[] {
-        DifferenceConstants.HAS_DOCTYPE_DECLARATION_ID,
-        DifferenceConstants.DOCTYPE_NAME_ID,
-        DifferenceConstants.DOCTYPE_PUBLIC_ID_ID,
-        DifferenceConstants.DOCTYPE_SYSTEM_ID_ID
-    };
-
-    static {
-        Arrays.sort(IGNORE);
-    }
 
     public int differenceFound(Difference difference) {
         if (DifferenceConstants.TEXT_VALUE_ID == difference.getId()
