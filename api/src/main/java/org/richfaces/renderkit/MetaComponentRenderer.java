@@ -35,4 +35,6 @@ public interface MetaComponentRenderer {
     public void encodeMetaComponent(FacesContext context, UIComponent component, String metaComponentId) 
         throws IOException;
 
+    public void decodeMetaComponent(FacesContext context, UIComponent component, String metaComponentId);
+    
 }
