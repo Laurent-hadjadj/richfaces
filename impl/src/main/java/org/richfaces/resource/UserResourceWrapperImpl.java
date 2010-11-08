@@ -33,9 +33,9 @@ import javax.faces.context.FacesContext;
  * 
  */
 public class UserResourceWrapperImpl extends BaseResourceWrapper<UserResource> implements UserResourceWrapper {
-
-    public UserResourceWrapperImpl(UserResource resourceObject) {
-        super(resourceObject);
+    
+    public UserResourceWrapperImpl(UserResource resourceObject, boolean cacheable, boolean versioned) {
+        super(resourceObject, cacheable, versioned);
     }
 
     @Override
