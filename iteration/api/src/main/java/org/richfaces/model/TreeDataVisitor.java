@@ -31,5 +31,8 @@ public interface TreeDataVisitor {
     public void enterNode();
     
     public void exitNode();
-    
+
+    public void beforeChildrenVisit();
+
+    public void afterChildrenVisit();
 }
