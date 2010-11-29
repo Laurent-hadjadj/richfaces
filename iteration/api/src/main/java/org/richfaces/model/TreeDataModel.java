@@ -48,5 +48,9 @@ public interface TreeDataModel<E> {
     public Object getWrappedData();
 
     public void setWrappedData(Object data);
+ 
+    public TreeDataModelTuple createSnapshot();
+
+    public void restoreFromSnapshot(TreeDataModelTuple tuple);
     
 }
