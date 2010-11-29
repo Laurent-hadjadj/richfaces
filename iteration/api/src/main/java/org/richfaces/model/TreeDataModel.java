@@ -21,10 +21,8 @@
  */
 package org.richfaces.model;
 
-import javax.faces.context.FacesContext;
+import java.util.Iterator;
 
-import org.ajax4jsf.model.DataVisitor;
-import org.ajax4jsf.model.Range;
 
 /**
  * @author Nick Belaevski
@@ -43,11 +41,7 @@ public interface TreeDataModel<E> {
     
     public E getData();
     
-    public void walk(FacesContext context, DataVisitor visitor, Range range, Object argument);
-
-    public void enterNode(DataVisitor visitor);
-    
-    public void exitNode(DataVisitor visitor);
+    public Iterator<TreeDataModelTuple> children();
 
     public Object getParentRowKey(Object rowKey);
     
