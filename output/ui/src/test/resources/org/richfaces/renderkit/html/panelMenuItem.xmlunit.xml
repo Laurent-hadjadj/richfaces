@@ -4,7 +4,7 @@
           <tr>
               <td class="rf-pm-itm-ico rf-pm-grid"></td>
               <td class="rf-pm-itm-lbl">panelMenuItem</td>
-              <td class="rf-pm-itm-exp-ico rf-pm-triangle-down"></td>
+              <td class="rf-pm-itm-exp-ico rf-pm-grid"></td>
           </tr>
       </tbody>
   </table>
