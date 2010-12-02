@@ -25,15 +25,17 @@ import java.util.Iterator;
 
 import javax.swing.tree.TreeNode;
 
-final class SwingTreeNodeTuplesIterator implements Iterator<TreeDataModelTuple> {
+import com.google.common.collect.UnmodifiableIterator;
 
-    private SequenceRowKey<Integer> baseKey;
+final class SwingTreeNodeTuplesIterator extends UnmodifiableIterator<TreeDataModelTuple> {
+
+    private SequenceRowKey baseKey;
     
     private Iterator<TreeNode> children;
     
     private int counter = 0;
 
-    SwingTreeNodeTuplesIterator(SequenceRowKey<Integer> baseKey, Iterator<TreeNode> children) {
+    SwingTreeNodeTuplesIterator(SequenceRowKey baseKey, Iterator<TreeNode> children) {
         this.baseKey = baseKey;
         this.children = children;
     }
@@ -49,19 +51,15 @@ final class SwingTreeNodeTuplesIterator implements Iterator<TreeDataModelTuple> 
     public TreeDataModelTuple next() {
         TreeNode node = children.next();
         
-        SequenceRowKey<Integer> key;
+        SequenceRowKey key;
         
         if (baseKey != null) {
             key = baseKey.append(getNextCounterValue());
         } else {
-            key = new SequenceRowKey<Integer>(getNextCounterValue());
+            key = new SequenceRowKey(getNextCounterValue());
         }
         
         return new TreeDataModelTuple(key, node);
     }
 
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
-    
 }

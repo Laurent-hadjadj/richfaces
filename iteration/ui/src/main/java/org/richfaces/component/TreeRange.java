@@ -41,10 +41,18 @@ public class TreeRange implements Range {
     }
 
     public boolean shouldProcessNode() {
+        if (tree.getRowKey() == null) {
+            return true;
+        }
+        
         return tree.findTreeNodeComponent() != null;
     }
     
     public boolean shouldIterateChildren() {
+        if (tree.getRowKey() == null) {
+            return true;
+        }
+        
         if (tree.isLeaf()) {
             return false;
         }
