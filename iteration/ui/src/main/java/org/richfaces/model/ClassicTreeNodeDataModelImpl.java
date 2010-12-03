@@ -26,12 +26,13 @@ import java.util.Iterator;
 import javax.faces.convert.Converter;
 
 import org.richfaces.convert.ObjectSequenceRowKeyConverter;
+import org.richfaces.model.iterators.ClassicTreeNodeTuplesIterator;
 
 /**
  * @author Nick Belaevski
  * 
  */
-public class ClassicTreeNodeDataModelImpl extends TreeSequenceKeyModel<TreeNode> {
+public class ClassicTreeNodeDataModelImpl extends NodesTreeSequenceKeyModel<TreeNode> {
 
     private static final Converter DEFAULT_CONVERTER = new ObjectSequenceRowKeyConverter();
     
