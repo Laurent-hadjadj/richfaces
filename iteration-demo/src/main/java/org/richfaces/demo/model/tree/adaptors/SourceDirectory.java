@@ -23,8 +23,12 @@
 package org.richfaces.demo.model.tree.adaptors;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.google.common.collect.Maps;
 
 /**
  * @author Nick Belaevski
@@ -37,8 +41,19 @@ public class SourceDirectory extends Entry {
     @XmlElement(name = "package")
     private List<Package> packages;
 
-    public List<Package> getPackages() {
-        return packages;
+    @XmlTransient
+    private Map<PackageKey, Package> packagesMap;
+    
+    public Map<PackageKey, Package> getPackages() {
+        if (packagesMap == null && packages != null) {
+            packagesMap = Maps.newLinkedHashMap();
+            
+            for (Package pkg: packages) {
+                packagesMap.put(new PackageKey(pkg.getName()), pkg);
+            }
+        }
+        
+        return packagesMap;
     }
 
 }
