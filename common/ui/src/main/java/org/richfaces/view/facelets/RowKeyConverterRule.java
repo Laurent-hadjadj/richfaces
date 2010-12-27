@@ -21,14 +21,14 @@
 
 package org.richfaces.view.facelets;
 
-import org.richfaces.component.UIDataAdaptor;
-
 import javax.faces.convert.Converter;
 import javax.faces.view.facelets.FaceletContext;
 import javax.faces.view.facelets.MetaRule;
 import javax.faces.view.facelets.Metadata;
 import javax.faces.view.facelets.MetadataTarget;
 import javax.faces.view.facelets.TagAttribute;
+
+import org.richfaces.component.UIDataAdaptor;
 
 /**
  * Apply rowKeyConverter to component
@@ -39,13 +39,6 @@ import javax.faces.view.facelets.TagAttribute;
 public class RowKeyConverterRule extends MetaRule {
     public static final RowKeyConverterRule INSTANCE = new RowKeyConverterRule();
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.sun.facelets.tag.MetaRule#applyRule(java.lang.String,
-     *      com.sun.facelets.tag.TagAttribute,
-     *      com.sun.facelets.tag.MetadataTarget)
-     */
     @Override
     public Metadata applyRule(String name, TagAttribute attribute, MetadataTarget meta) {
         if (meta.isTargetInstanceOf(UIDataAdaptor.class)) {
