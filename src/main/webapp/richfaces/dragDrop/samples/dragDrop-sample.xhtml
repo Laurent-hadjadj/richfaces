@@ -14,9 +14,18 @@
 			text-align: center;
 			padding-top: 5px;
 		}
+		.rf-ind-drag{
+			font-size:11px;
+			cursor:pointer;
+			width:100px;
+			border:1px solid gray;
+			padding:2px
+		}
+		.rf-ind-acpt{border:2px solid green}
+		.rf-ind-rejt{border:2px solid red}
 	</h:outputStylesheet>
 	<h:form id="form">
-
+ 
 		<h:panelGrid columnClasses="panelc valign, valign, valign, valign" columns="4" width="100%">
 
 			<rich:panel style="width:133px">
@@ -25,11 +34,8 @@
 				</f:facet>
 				<h:dataTable id="src" columns="1" value="#{dragDropBean.source}"
 					var="fm" footerClass="footerClass">
-
 					<h:column>
-						<a4j:outputPanel
-							style="width:100px;border:1px solid gray;padding:2px"
-							layout="block">
+						<a4j:outputPanel layout="block" styleClass="rf-ind-drag">
 							<rich:dragSource type="#{fm.family}"
 								dragValue="#{fm}" />
 							<h:outputText value="#{fm.name}"></h:outputText>
