@@ -45,4 +45,6 @@ public interface Request {
  
     public boolean isPolling();
     
+    public MessageListener getMessageListener();
+    
 }
