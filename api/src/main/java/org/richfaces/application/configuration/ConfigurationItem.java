@@ -38,7 +38,7 @@ import java.lang.annotation.Target;
 @Documented
 public @interface ConfigurationItem {
 
-    public ConfigurationItemSource source() default ConfigurationItemSource.contextInitParameter;
+    public ConfigurationItemSource source() default ConfigurationItemSource.defaultSource;
     
     public String[] names();
     
