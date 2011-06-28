@@ -21,17 +21,54 @@
  */
 package org.richfaces.demo.push;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * @author <a href="mailto:lfryc@redhat.com">Lukas Fryc</a>
  */
-@ViewScoped
-@ManagedBean
-public class PushBean {
+@Named
+@SessionScoped
+public class PushBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String userIdentifier;
+
+    @Inject
+    @Push
+    Event<String> pushEvent;
+
+    @PostConstruct
+    public void initialize() {
+        if (userIdentifier == null) {
+            userIdentifier = getUUID().replace("-", "");
+        }
+    }
+
+    /**
+     * Sends message.
+     *
+     * @param message to send
+     */
+    public void sendMessage(String message) {
+        pushEvent.fire(message);
+    }
+
+    /**
+     * Returns current user identifier.
+     *
+     * @return current user identifier.
+     */
+    public String getUserIdentifier() {
+        return userIdentifier;
+    }
 
     /**
      * Generates unique ID as string.
