@@ -28,7 +28,7 @@
                 <csv:message for="dblrange" />
 
                 <h:outputLabel for="longrange" value="Text long range from 2 to 5, custom msg:" />
-                <h:inputText id="longrange" value="#{test.longValue}" converterMessage="Nor a number"
+                <h:inputText id="longrange" value="#{test.longValue}" converterMessage="Not a number"
                     validatorMessage="Wrong number">
                     <f:validateLongRange minimum="2" maximum="5" />
                     <csv:validator event="blur" />
