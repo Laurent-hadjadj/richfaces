@@ -2,20 +2,26 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:a4j="http://richfaces.org/a4j">
 
 <f:view>
     <h:head>
     </h:head>
     <h:body>
-        <h:form id="form">
-            Enter username:
-            <h:inputText value="#{username}" required="true" />
-            <h:commandLink action="chat" value="Enter chat" />
+        <h:form>
+            <br /><br /><br /><br />
+            <a4j:commandButton value="Push!" action="#{richBean.push}" />
+            
+            <a4j:log mode="console" />
+            
+            <a4j:push address="sampleAddress"  ondataavailable="$('*[id$=outputDate]').text(event.rf.data)" />
+
+
+
+            <a4j:outputPanel id="outputDate">
+                Date: #{richBean.date}
+            </a4j:outputPanel>
         </h:form>
-        <h:link value="Test with bad user name" outcome="chat">
-            <f:param name="username" value="badname" />
-        </h:link>
     </h:body>
 </f:view>
 </html>
