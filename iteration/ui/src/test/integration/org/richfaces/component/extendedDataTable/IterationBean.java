@@ -39,14 +39,6 @@ public class IterationBean implements Serializable {
 
     private String[] array = {"3","6","4","8","2","1","5","7","9","0" };
     private List<String> values = Arrays.asList(array);
-    private String widthState = "{'columnsWidthState':{'column1':'210px','column2':'75px'}}";
-    private String orderState = "{'columnsOrderState':['column2','column1','column3']}";
-    private String sortState = "{'columnsSortState':{'column2':'descending'}}";
-    private String filterState = "{'columnsFilterState':{'column2':'6'}}";
-    private String[] columnsOrder = null; //{"column1", "column2"};
-
-    private SortOrder sortOrder = SortOrder.ascending;
-    private Long filterValue = 10L;
 
 
     public IterationBean() {
@@ -55,41 +47,4 @@ public class IterationBean implements Serializable {
     public List<String> getValues() {
         return values;
     }
-
-    public String getWidthState() {
-        return widthState;
-    }
-
-    public String getOrderState() {
-        return orderState;
-    }
-
-    public String getSortState() {
-        return sortState;
-    }
-
-    public String getFilterState() {
-        return filterState;
-    }
-
-    public String[] getColumnsOrder() {
-        return columnsOrder;
-    }
-
-    public SortOrder getSortOrder() {
-        return sortOrder;
-    }
-
-    public void setSortOrder(SortOrder sortOrder) {
-        this.sortOrder = sortOrder;
-    }
-
-    public Long getFilterValue() {
-        return filterValue;
-    }
-
-    public void setFilterValue(Long filterValue) {
-        this.filterValue = filterValue;
-    }
-
 }
