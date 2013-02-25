@@ -94,10 +94,8 @@ public class RF12768_Test {
         p.body("<h:form id='myForm'>");
         p.body("<rich:tabPanel id='tabPanel'>");
         p.body("    <rich:tab id='tab1' name='tab1' header='tab1 header'>content of tab 1</rich:tab>");
-        p.body("    <rich:tab id='tab2' name='tab2' header='tab2 header'>content of tab 2</rich:tab>");
+        p.body("    <rich:tab id='tab2' name='tab2' header='tab2 header' disabled='true'>content of tab 2</rich:tab>");
         p.body("    <rich:tab id='tab3' name='tab3' header='tab3 header'>content of tab 3</rich:tab>");
-        p.body("    <rich:tab id='tab4' name='tab4' header='tab4 header' disabled='true'>content of tab 4</rich:tab>");
-        p.body("    <rich:tab id='tab5' name='tab5' header='tab5 header'>content of tab 5</rich:tab>");
 
         p.body("    <c:forEach items='#{tabPanelBean.tabBeans}' var='newTab'>");
         p.body("        <rich:tab id='#{newTab.tabId}' name='#{newTab.tabName}'>");
