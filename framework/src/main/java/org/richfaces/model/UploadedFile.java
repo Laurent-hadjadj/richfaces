@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 
-import org.richfaces.ui.input.FileUploadException;
+import org.richfaces.ui.input.fileUpload.FileUploadException;
 
 /**
  * @author Konstantin Mishin
