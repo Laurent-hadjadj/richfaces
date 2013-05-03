@@ -32,6 +32,16 @@ public class FileNameMapping {
     private String value;
     private Pattern namePattern = null;
 
+    public FileNameMapping() {
+    }
+
+    public FileNameMapping(String name, String value) {
+        this.name = name;
+        this.value = value;
+    }
+
+
+
     public String getName() {
         return name;
     }
