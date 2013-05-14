@@ -46,13 +46,6 @@
             <!-- RichFaces BOM Import -->
             <dependency>
                 <groupId>org.richfaces</groupId>
-                <artifactId>richfaces-bom</artifactId>
-                <version>${version.richfaces}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.richfaces</groupId>
                 <artifactId>richfaces-build</artifactId>
                 <version>${version.richfaces}</version>
                 <type>pom</type>
@@ -79,11 +72,14 @@
         <dependency>
             <groupId>org.richfaces</groupId>
             <artifactId>richfaces</artifactId>
+            <version>${version.richfaces}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.atmosphere</groupId>
-            <artifactId>atmosphere-runtime</artifactId>
+            <groupId>org.richfaces</groupId>
+            <artifactId>richfaces-push</artifactId>
+            <version>${version.richfaces}</version>
+            <type>pom</type>
         </dependency>
 
     </dependencies>
