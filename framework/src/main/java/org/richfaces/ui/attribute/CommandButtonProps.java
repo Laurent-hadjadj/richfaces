@@ -30,15 +30,7 @@ import org.richfaces.cdk.annotations.EventName;
  *
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
-public interface CommandButtonProps extends EventsMouseProps, EventsKeyProps {
-    /**
-     * Flag indicating that this element must never receive focus or be included in a subsequent submit.
-     */
-    @Attribute(description = @Description(
-            value = "Flag indicating that this element must never receive focus or be included in a subsequent submit.",
-            displayName = "Disabled Flag"))
-    boolean isDisabled();
-
+public interface CommandButtonProps extends DisabledProps, EventsMouseProps, EventsKeyProps {
     /**
      * Javascript code executed when a pointer button is clicked over this element.
      */
