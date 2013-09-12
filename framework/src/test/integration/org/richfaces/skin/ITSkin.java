@@ -63,6 +63,15 @@ public class ITSkin {
     @FindBy(id = "input")
     WebElement input;
 
+    @FindBy(id = "buttonSkin1")
+    WebElement buttonSkin1;
+
+    @FindBy(id = "buttonSkin2")
+    WebElement buttonSkin2;
+
+    @FindBy(id = "buttonSkin3")
+    WebElement buttonSkin3;
+
     @Deployment
     public static WebArchive createDeployment() {
         FrameworkDeployment deployment = new FrameworkDeployment(ITSkin.class);
@@ -73,7 +82,7 @@ public class ITSkin {
 
                 input.getOrCreateContextParam()
                         .paramName("org.richfaces.skin")
-                        .paramValue("plain");
+                        .paramValue("#{skinTestBean.skin}");
 
                 return input;
             };
@@ -86,49 +95,42 @@ public class ITSkin {
         return deployment.getFinalArchive();
     }
 
-    /**
-     * {@link https://issues.jboss.org/browse/RF-11103}
-     */
     @Test
-    @Category(Failing.class)
-    public void test_plain_skin() throws InterruptedException {
-        browser.get(contextPath.toExternalForm());
-        String background = panel.getCssValue("background-image");
-        Assert.assertEquals("none", input.getCssValue("background-image"));
-    }
-
-    /**
-     * Development this test will wait until the test_plain_skin test passes
-     */
-    @Test
-    @Ignore
-    public void changing_skin_dynamically() throws InterruptedException {
-        final String white = "rgba(0, 0, 0, 0)";
+    public void changing_skins() throws InterruptedException {
+        String expectedUrl;
 
         // given
         browser.get(contextPath.toExternalForm());
-        String background = panel.getCssValue("background-image");
-        Assert.assertNotEquals(white, panel.getCssValue("background-image"));
-        Assert.assertNotEquals(white, input.getCssValue("background-image"));
 
-        WebElement buttonPlain = browser.findElement(By.id("buttonPlain"));
-        Graphene.guardHttp(buttonPlain).click();
-        Assert.assertEquals(white, panel.getCssValue("background-image"));
-        Assert.assertEquals(white, input.getCssValue("background-image"));
+        // TODO: derive the backGroundImage URLs from the Dynamic image classes
 
-        WebElement buttonDefault = browser.findElement(By.id("buttonDefault"));
-        Graphene.guardHttp(buttonDefault).click();
-        Assert.assertEquals(background, panel.getCssValue("background-image"));
-        Assert.assertEquals(background, input.getCssValue("background-image"));
+        expectedUrl = "url(" + contextPath.toExternalForm() + "faces/rfRes/buttonBackgroundImage.png?db=eAFjZGBkZOBm!P-f8f!bV88Y!185f5yBCQBPWAk3&ln=org.richfaces.images)";
+        Assert.assertEquals("DEFAULT button background-url is incorrect", expectedUrl, buttonSkin1.getCssValue("background-image"));
+
+        Graphene.guardHttp(buttonSkin1).click();
+
+        expectedUrl = "url(" + contextPath.toExternalForm() + "faces/rfRes/buttonBackgroundImage.png?db=eAFjZGBkZOBm!P-f8f-n70Bi37UfDEwAUQgJhA__&ln=org.richfaces.images)";
+        Assert.assertEquals("blueSky button background-url is incorrect", expectedUrl, buttonSkin1.getCssValue("background-image"));
+
+        Graphene.guardHttp(buttonSkin2).click();
+
+        expectedUrl = "url(" + contextPath.toExternalForm() + "faces/rfRes/buttonBackgroundImage.png?db=eAFjZGBkZOBm!P-f8f!9iAjG!xMYGBiYAD5VBi8_&ln=org.richfaces.images)";
+        Assert.assertEquals("ruby button background-url is incorrect", expectedUrl, buttonSkin1.getCssValue("background-image"));
+
+        Graphene.guardHttp(buttonSkin3).click();
+
+        expectedUrl = "none";
+        Assert.assertEquals("plain button background-url is incorrect", expectedUrl, buttonSkin1.getCssValue("background-image"));
     }
 
     private static void addIndexPage(FrameworkDeployment deployment) {
         FaceletAsset p = new FaceletAsset();
         p.form("<r:panel id='panel' header='Header Text'>Some content ");
-        p.form("<h:inputText id='input' /> ");
+        p.form("    <h:inputText id='input' /> ");
         p.form("</r:panel> ");
-        p.form("<h:commandButton id='buttonPlain' actionListener='#{skinTestBean.setSkin(\"plain\")}' value = 'Select plain Skin' /> ");
-        p.form("<h:commandButton id='buttonDefault' actionListener='#{skinTestBean.setSkin(\"DEFAULT\")}' value = 'Select DEFAULT skin'  /> ");
+        p.form("<h:commandButton id='buttonSkin1' actionListener='#{skinTestBean.setSkin(\"blueSky\")}' value = 'Select skin 1' /> ");
+        p.form("<h:commandButton id='buttonSkin2' actionListener='#{skinTestBean.setSkin(\"ruby\")}' value = 'Select skin 2' /> ");
+        p.form("<h:commandButton id='buttonSkin3' actionListener='#{skinTestBean.setSkin(\"plain\")}' value = 'Select skin 3' /> ");
         deployment.archive().addAsWebResource(p, "index.xhtml");
     }
 }
