@@ -22,13 +22,14 @@
 
 package org.richfaces.integration.resource;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.net.URL;
 import java.util.List;
 
-import com.google.common.base.Function;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
@@ -47,11 +48,14 @@ import org.openqa.selenium.WebElement;
 import org.richfaces.base64.Codec;
 import org.richfaces.deployment.FrameworkDeployment;
 import org.richfaces.resource.ResourceHandlerImpl;
-import org.richfaces.resource.external.ExternalStaticResourceFactory;
+import org.richfaces.resource.external.ResourceTracker;
+import org.richfaces.resource.mapping.ResourceMapper;
 import org.richfaces.shrinkwrap.descriptor.FaceletAsset;
 import org.richfaces.shrinkwrap.descriptor.PropertiesAsset;
 
 import category.Smoke;
+
+import com.google.common.base.Function;
 
 @RunWith(Arquillian.class)
 @WarpTest
@@ -90,7 +94,8 @@ public class ITResourceMapping {
         deployment.archive()
                 /** classes */
                 .addPackage(ResourceHandlerImpl.class.getPackage())
-                .addPackage(ExternalStaticResourceFactory.class.getPackage())
+                .addPackage(ResourceTracker.class.getPackage())
+                .addPackage(ResourceMapper.class.getPackage())
                 .addClasses(Codec.class)
                 /** META-INF */
                 .addAsResource(staticResourceMapping, "META-INF/richfaces/static-resource-mappings.properties")
@@ -129,7 +134,7 @@ public class ITResourceMapping {
         WebElement element = driver.findElement(By.cssSelector("head > link[rel=stylesheet]"));
         String href = element.getAttribute("href");
 
-        assertTrue("href must contain relocated.css resource path: " + href, href.contains("/javax.faces.resource/relocated.css"));
+        assertThat(href, containsString("/javax.faces.resource/relocated.css"));
     }
 
     @Test
