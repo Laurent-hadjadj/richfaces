@@ -57,13 +57,13 @@ public class JavaScriptCompressingProcessor implements ResourceProcessor {
     }
 
     @Override
-    public void process(String resourceName, InputSupplier<? extends InputStream> in,
+    public void process(String outputName, InputSupplier<? extends InputStream> in,
             OutputSupplier<? extends OutputStream> out, boolean closeAtFinish) throws IOException {
-        process(resourceName, in.getInput(), out.getOutput(), closeAtFinish);
+        process(outputName, in.getInput(), out.getOutput(), closeAtFinish);
     }
 
     @Override
-    public void process(String resourceName, InputStream in, OutputStream out, boolean closeAtFinish) throws IOException {
+    public void process(String outputName, InputStream in, OutputStream out, boolean closeAtFinish) throws IOException {
 
         Reader reader = null;
         Writer writer = null;
@@ -72,7 +72,7 @@ public class JavaScriptCompressingProcessor implements ResourceProcessor {
             reader = new InputStreamReader(in, charset);
             writer = new OutputStreamWriter(out, charset);
 
-            MavenLogErrorReporter reporter = new MavenLogErrorReporter(resourceName);
+            MavenLogErrorReporter reporter = new MavenLogErrorReporter(outputName);
             new JavaScriptCompressor(reader, reporter).compress(writer, 0, true, true, false, false);
 
             if (!closeAtFinish) {
