@@ -22,7 +22,6 @@
 
 package org.richfaces.integration.partialViewContext;
 
-import static org.jboss.arquillian.graphene.Graphene.guardAjax;
 import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
@@ -37,9 +36,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.richfaces.deployment.CoreDeployment;
 import org.richfaces.shrinkwrap.descriptor.FaceletAsset;
@@ -77,37 +74,24 @@ public class ITMultipleFormUpdate {
     @Test
     public void when_form_is_explicitly_listed_in_render_then_its_ViewState_should_be_updated_after_response() {
         browser.get(contextPath.toExternalForm());
-        assertEquals("both forms should have same ViewState", getViewState(firstForm), getViewState(secondForm));
+        assertEquals("both forms should have same ViewState", firstForm.getViewState(), secondForm.getViewState());
 
-        String viewState = getViewState(firstForm);
-        firstForm.input.sendKeys("1");
-        guardAjax(firstForm.button).click();
+        String viewState = firstForm.getViewState();
+        firstForm.setInput("1");
+        firstForm.submit();
 
-        assertEquals("ViewState should not change", viewState, getViewState(firstForm));
-        assertEquals("both forms should have same ViewState", getViewState(firstForm), getViewState(secondForm));
-        assertEquals("first form input should be 1", "1", getInput(firstForm));
-        assertEquals("second form input should be 1", "1", getInput(secondForm));
+        assertEquals("ViewState should not change", viewState, firstForm.getViewState());
+        assertEquals("both forms should have same ViewState", firstForm.getViewState(), secondForm.getViewState());
+        assertEquals("first form input should be 1", "1", firstForm.getInput());
+        assertEquals("second form input should be 1", "1", secondForm.getInput());
 
-        secondForm.input.clear();
-        secondForm.input.sendKeys("2");
-        guardAjax(secondForm.button).click();
+        secondForm.setInput("2");
+        secondForm.submit();
 
-        assertEquals("ViewState should not change", viewState, getViewState(secondForm));
-        assertEquals("both forms should have same ViewState", getViewState(secondForm), getViewState(firstForm));
-        assertEquals("first form input should be 2", "2", getInput(firstForm));
-        assertEquals("second form input should be 2", "2", getInput(secondForm));
-    }
-
-    private String getViewState(Form form) {
-        try {
-            return form.viewState.getAttribute("value");
-        } catch (NoSuchElementException e) {
-            return null;
-        }
-    }
-
-    private String getInput(Form form) {
-        return form.input.getAttribute("value");
+        assertEquals("ViewState should not change", viewState, secondForm.getViewState());
+        assertEquals("both forms should have same ViewState", secondForm.getViewState(), firstForm.getViewState());
+        assertEquals("first form input should be 2", "2", firstForm.getInput());
+        assertEquals("second form input should be 2", "2", secondForm.getInput());
     }
 
     private static void addIndexPage(CoreDeployment deployment) {
@@ -128,17 +112,5 @@ public class ITMultipleFormUpdate {
         p.body("</h:form>");
 
         deployment.archive().addAsWebResource(p, "index.xhtml");
-    }
-
-    private class Form {
-
-        @FindBy(name = "javax.faces.ViewState")
-        WebElement viewState;
-
-        @FindBy(css = "input[type=submit]")
-        WebElement button;
-
-        @FindBy(css = "input[type=text]")
-        WebElement input;
     }
 }
