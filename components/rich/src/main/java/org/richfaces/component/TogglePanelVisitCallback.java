@@ -21,8 +21,6 @@
  **/
 package org.richfaces.component;
 
-import org.richfaces.model.DataVisitResult;
-
 import javax.faces.component.visit.VisitResult;
 import javax.faces.context.FacesContext;
 
