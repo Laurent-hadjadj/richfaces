@@ -1,3 +1,11 @@
+4.5.18
+------------
+
+    Security
+    [   ] Remove a4j:mediaOutput component to fix CVE-2018-12532
+          (backport of the fix published in the albfernandez fork, commit dff8da749 - 2018-08-21)
+          BREAKING: pages using a4j:mediaOutput must be adapted
+
 4.5.17.Final
 ------------
 
