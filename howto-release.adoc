@@ -18,11 +18,11 @@ Use following template for a `release-settings.xml` and pass it to all Maven exe
     <localRepository>/tmp/richfaces-release-localRepository</localRepository>
 
     <mirrors>
-        <mirror> 
-            <id>jboss-staging-repository-group</id> 
-            <mirrorOf>*,!jboss-qa-releases-repository</mirrorOf> 
-            <name>JBoss.org Staging Repository Group</name> 
-            <url>https://repository.jboss.org/nexus/content/groups/staging</url> 
+        <mirror>
+            <id>jboss-staging-repository-group</id>
+            <mirrorOf>*,!jboss-qa-releases-repository</mirrorOf>
+            <name>JBoss.org Staging Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/staging</url>
         </mirror>
     </mirrors>
 
@@ -76,7 +76,7 @@ First, you need to diverge a release branch:
 git checkout master -b release/4.5.0.Alpha3
 ----
 Bump to release versions:
- 
+
 ----
 $ bash components/change_version.sh -r -o <4.5.0-SNAPSHOT> -n <4.5.0.Alpha3>
 $ git add -A
@@ -108,7 +108,7 @@ $ git push origin <4.5.0.Alpha3>
 
 The release is now prepared for staging to the JBoss Maven repository:
 
----- 
+----
 $ mvn -s <settings.xml> -P release clean deploy
 ----
 
@@ -152,9 +152,9 @@ https://issues.jboss.org/secure/ReleaseNote.jspa?projectId=12310341&version=1232
 == Releasing/Dropping
 
 Once QE and development have verified and cleared the staged release following the release testing process, next step is to promote the staged bits to JBoss maven release repo.
- 
+
 This is very easy. Simply log into the nexus server following https://community.jboss.org/wiki/MavenDeployingARelease[Maven Deploying a Release] and "promote" the release.
- 
+
 If QE and development find issues, and the release needs to be dropped follow the directions above, and "drop" the stage.
 
 If the release was dropped the tag needs to be dropped as well:
