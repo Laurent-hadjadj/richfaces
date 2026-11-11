@@ -5,6 +5,10 @@
     [   ] Remove a4j:mediaOutput component to fix CVE-2018-12532
           (backport of the fix published in the albfernandez fork, commit dff8da749 - 2018-08-21)
           BREAKING: pages using a4j:mediaOutput must be adapted
+    [   ] Remove serialization/deserialization of resource data (resource URL parameter "do"):
+          resource state is now only transmitted as bytes ("db"), LookAheadObjectInputStream and its whitelist are removed
+          (backport of albfernandez commit ba2a98a49 - 2018-11-17)
+          BREAKING: custom resources implementing javax.faces.component.StateHolder are no longer supported
 
 4.5.17.Final
 ------------
