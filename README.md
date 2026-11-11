@@ -50,7 +50,8 @@ Les changements de sécurité sont des **reports** (*backports*) de travaux publ
 - 👤 **Alberto Fernandez** : suppression de `a4j:mediaOutput` (CVE-2018-12532), commit `dff8da749` (2018-08-21).
 - 👤 **Kyle Stiemann** : suppression de la sérialisation et de la désérialisation des données de ressource, commit `ba2a98a49` (2018-11-17).
 
-Le code RichFaces d'origine est l'œuvre de Red Hat, de JBoss et des contributeurs de RichFaces. Le report sur la 4.5.17.Final et la correction du build ont été réalisés par 👤**Laurent Hadjadj**.
+Le code RichFaces d'origine est l'œuvre de Red Hat, de JBoss et des contributeurs de RichFaces.
+Le report sur la 4.5.17.Final et la correction du build ont été réalisés par 👤**Laurent Hadjadj**.
 
 ## 6️⃣ 🔨 Compilation de cette version
 
@@ -60,4 +61,4 @@ Le CDK `4.5.0.Final` **n'est pas disponible sur Maven Central**. Il est publié 
 
 ## 7️⃣ 📚 Documentation d'origine
 
-Le guide de démarrage, les instructions de compilation détaillées et la documentation de contribution du projet d'origine (en anglais) restent dans [README.adoc](README.adoc) et [CONTRIBUTING.md](CONTRIBUTING.md).
+Le guide de démarrage, les instructions de compilation détaillées et la documentation de contribution du projet d'origine (en anglais) restent dans [README-origine.adoc](README-origine.adoc) et [CONTRIBUTING.md](CONTRIBUTING.md).
